@@ -1,5 +1,5 @@
 # RCG
-## Create and analyze c/c++ reverse call graph traversal.
+## Create and analyze c/c++ reverse call graph.
 
 Parse gcc RTL files, create reverse call graph traversal, then use call graph to find call path of interest.
 
