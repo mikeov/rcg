@@ -27,7 +27,7 @@ To build:
     [-il]         -- file with list of include functions, one function name per line
     [-el]         -- file with list of exclude functions, one function name per line
     [-si]         -- stop traversal if matches function name in include list
-            (default); has effect only if include list is no empty; call path with
+            (default); has effect only if include list is not empty; call path with
             excluded functions that occur in the path before include functions will
             not be excluded / filtered out
     [-ci]         -- continue traversal if matches include function
