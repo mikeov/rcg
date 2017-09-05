@@ -86,7 +86,7 @@ for_each_edge_demangle_self(
                 continue;
             }
             func(demangle(demangle_dict, it->first),
-	    	demangle(demangle_dict, *cit));
+                demangle(demangle_dict, *cit));
         }
     }
 }
@@ -289,7 +289,7 @@ rtl_parse(
                 const char* sign_end = ptr;
                 if (name_end <= sign_end) {
                     while (name_beg < sign_end &&
-		    		(sign_end[-1] & 0xFF) <= k_space_symbol) {
+                            (sign_end[-1] & 0xFF) <= k_space_symbol) {
                         sign_end--;
                     }
                     ptr = skip_white_space(ptr + func_name_end_len, end);
@@ -420,7 +420,7 @@ find_roots(
             }
             path.push_back(caller);
             find_roots(graph, path_include, path_exclude, path, os, found_flag,
-	    	stop_at_include_flag);
+                stop_at_include_flag);
             path.pop_back();
             traversed_callers++;
         }
@@ -751,8 +751,10 @@ main(
             " [-el]         -- file with list of exclude functions, one function"
                 " name per line\n"
             " [-si]         -- stop traversal if matches function name in"
-	    	" include list (default) (has effect on call path filtering with"
-                " function excludes)\n"
+                " include list (default); has effect only if include list is"
+                " no empty; call path with excluded functions that occur in the"
+                " path before include functions will not be excluded / filtered"
+                " out\n"
             " [-ci]         -- continue traversal if matches include function\n"
             " With -egypt the input is the output of \"egypt\" perl script"
             " which converts files created by gcc -fdump-rtl-expand into"
@@ -838,7 +840,8 @@ main(
         }
         path.push_back(&*it);
         find_roots(graph, path_include, path_exclude, path, std::cout,
-            path_include.empty(), stop_at_include_flag);
+            path_include.empty(),
+            stop_at_include_flag && ! path_include.empty());
         path.clear();
     }
     return ret;
